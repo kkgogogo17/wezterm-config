@@ -11,14 +11,29 @@ wezterm.on("gui-startup", function()
 	window:gui_window():maxmimize()
 end)
 
+-- Import our new module (put this near the top of your wezterm.lua)
+local appearance = require("appearance")
+
+-- Use it!
+-- if appearance.is_dark() then
+config.color_scheme = "Tokyo Night"
+-- else
+-- 	config.color_scheme = "Tokyo Night Day"
+-- end
+
 --this is where you actually apply your config choices
 -- font size
-config.font_size = 16
-config.font = wezterm.font("JetBrains Mono")
-
+config.font_size = 15
+config.font = wezterm.font("JetBrains Mono", { weight = "Bold" })
 -- for example, changing the colorscheme
-config.color_scheme = "Gruvbox Dark (Gogh)"
+-- config.color_scheme = "Github Light (Gogh)"
 -- config.color_scheme = "mariana"
+config.colors = {
+	cursor_bg = "orange",
+	cursor_fg = "black",
+	cursor_border = "orange",
+}
+
 config.adjust_window_size_when_changing_font_size = false
 
 -- Leader is the same as my old tmux prefix
@@ -66,7 +81,7 @@ config.keys = {
 	},
 }
 
-config.window_background_opacity = 0.9
+config.window_background_opacity = 1
 config.macos_window_background_blur = 50
 
 -- and finally, return the configuration to wezterm
