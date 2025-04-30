@@ -16,7 +16,7 @@ local appearance = require("appearance")
 
 -- Use it!
 -- if appearance.is_dark() then
-config.color_scheme = "Tokyo Night"
+config.color_scheme = "Gruvbox light, soft (base16)"
 -- else
 -- 	config.color_scheme = "Tokyo Night Day"
 -- end
@@ -24,13 +24,13 @@ config.color_scheme = "Tokyo Night"
 --this is where you actually apply your config choices
 -- font size
 config.font_size = 15
-config.font = wezterm.font("JetBrains Mono", { weight = "Bold" })
+config.font = wezterm.font("JetBrains Mono", { weight = "DemiBold" })
 -- for example, changing the colorscheme
 -- config.color_scheme = "Github Light (Gogh)"
 -- config.color_scheme = "mariana"
 config.colors = {
 	cursor_bg = "orange",
-	cursor_fg = "black",
+	cursor_fg = "Black",
 	cursor_border = "orange",
 }
 
@@ -80,6 +80,24 @@ config.keys = {
 		}),
 	},
 }
+
+-- remove padding around
+config.window_padding = {
+	left = "0",
+	right = "0",
+	top = "0",
+	bottom = "0",
+}
+
+wezterm.on("update-status", function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	if string.find(pane:get_title(), "^n-vi-m-.*") then
+		overrides.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+	else
+		overrides.window_padding = config.window_padding
+	end
+	window:set_config_overrides(overrides)
+end)
 
 config.window_background_opacity = 1
 config.macos_window_background_blur = 50
