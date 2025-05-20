@@ -16,7 +16,7 @@ local appearance = require("appearance")
 
 -- Use it!
 -- if appearance.is_dark() then
-config.color_scheme = "Gruvbox light, soft (base16)"
+config.color_scheme = "Mariana"
 -- else
 -- 	config.color_scheme = "Tokyo Night Day"
 -- end
@@ -24,15 +24,17 @@ config.color_scheme = "Gruvbox light, soft (base16)"
 --this is where you actually apply your config choices
 -- font size
 config.font_size = 15
-config.font = wezterm.font("JetBrains Mono", { weight = "DemiBold" })
+config.font = wezterm.font("JetBrains Mono", { weight = "Bold" })
 -- for example, changing the colorscheme
 -- config.color_scheme = "Github Light (Gogh)"
 -- config.color_scheme = "mariana"
 config.colors = {
-	cursor_bg = "orange",
+	cursor_bg = "#61afef",
 	cursor_fg = "Black",
-	cursor_border = "orange",
+	cursor_border = "#61afef",
 }
+config.default_cursor_style = "BlinkingBlock"
+config.cursor_blink_rate = 800
 
 config.adjust_window_size_when_changing_font_size = false
 
@@ -88,6 +90,8 @@ config.window_padding = {
 	top = "0",
 	bottom = "0",
 }
+
+config.window_decorations = "RESIZE"
 
 wezterm.on("update-status", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
